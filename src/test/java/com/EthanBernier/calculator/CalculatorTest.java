@@ -8,13 +8,6 @@ import static org.assertj.core.api.Assertions.*;
 
 public class CalculatorTest {
 
-    private Calculator calculator;
-
-    @AfterEach
-    public void afterEach() {
-        calculator =  null;
-    }
-
     @Test
     public void devrait_retourner_la_somme_de_deux_entiers_positif(){
 
@@ -23,7 +16,7 @@ public class CalculatorTest {
         int b = 5;
 
         //WHEN
-        int resultat = calculator.add(a,b);
+        int resultat = Calculator.add(a,b);
 
         //THEN
         assertThat(resultat).isEqualTo(10);
@@ -38,7 +31,7 @@ public class CalculatorTest {
         int b = 5;
 
         //WHEN
-        int resultat = calculator.divide(a,b);
+        int resultat = Calculator.divide(a,b);
 
         //THEN
         assertThat(resultat).isEqualTo(1);
