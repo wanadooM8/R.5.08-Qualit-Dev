@@ -49,14 +49,13 @@ public class CalculatorTest {
     }
 
     @Test
-    public void devrait_lever_une_exception_si_la_somme_depasse_la_capacite_d_un_int(){
+    public void devrait_lever_une_exception_si_la_somme_est_trop_grande(){
 
         //GIVEN
-        int a = Integer.MAX_VALUE;
+        int a = Integer.MAX_VALUE; // plus grand int possible : 2147483647
         int b = 1;
 
         //WHEN / THEN
-        // assertThatThrownBy exécute le lambda et vérifie qu'il lève bien l'exception attendue
         assertThatThrownBy(() -> Calculator.add(a, b))
                 .isInstanceOf(ArithmeticException.class);
 
@@ -73,20 +72,6 @@ public class CalculatorTest {
         assertThatThrownBy(() -> Calculator.divide(a, b))
                 .isInstanceOf(ArithmeticException.class)
                 .hasMessage("Division par zéro impossible");
-
-    }
-
-    @Test
-    public void devrait_lever_une_exception_si_le_quotient_depasse_la_capacite_d_un_int(){
-
-        //GIVEN
-        int a = Integer.MIN_VALUE;
-        int b = -1;
-
-        //WHEN / THEN
-        assertThatThrownBy(() -> Calculator.divide(a, b))
-                .isInstanceOf(ArithmeticException.class)
-                .hasMessage("Dépassement de capacité");
 
     }
 

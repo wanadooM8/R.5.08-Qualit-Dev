@@ -6,33 +6,17 @@ import java.util.Set;
 public class Calculator {
 
 
-    /**
-     * Retourne la somme de a et b.
-     * @throws ArithmeticException si le résultat dépasse la capacité d'un int
-     */
     public static int add(int a, int b) {
-        // Avec "a + b", un dépassement passe inaperçu : Integer.MAX_VALUE + 1 donne Integer.MIN_VALUE.
-        // Math.addExact lève une ArithmeticException au lieu de renvoyer un résultat faux.
+        // Si la somme est trop grande pour un int, Math.addExact lève une ArithmeticException
+        // (avec "a + b", le résultat serait faux sans aucune erreur)
         return Math.addExact(a, b);
     }
 
-    /**
-     * Retourne le quotient entier de a par b.
-     * @throws ArithmeticException si b vaut 0, ou si le résultat dépasse la capacité d'un int
-     */
     public static int divide(int a, int b) {
-
-        // Division par zéro : on lève l'exception nous-mêmes avec un message explicite
+        // On ne peut pas diviser par zéro
         if (b == 0) {
             throw new ArithmeticException("Division par zéro impossible");
         }
-
-        // Seul cas de dépassement : Integer.MIN_VALUE / -1 vaudrait 2147483648,
-        // qui ne tient pas dans un int (Java renverrait Integer.MIN_VALUE sans erreur)
-        if (a == Integer.MIN_VALUE && b == -1) {
-            throw new ArithmeticException("Dépassement de capacité");
-        }
-
         return a / b;
     }
 

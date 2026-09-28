@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'idea' // optional (to generate IntelliJ IDEA project files)
+    id 'jacoco'
 }
 
 repositories {
@@ -17,5 +18,16 @@ test {
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
+	}
+	finalizedBy jacocoTestReport // après les tests, on génère le rapport de couverture
+}
+
+jacocoTestReport {
+	dependsOn test // le rapport a besoin que les tests aient tourné
+	reports {
+		xml.required = true
+		html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test')
+		// dossier et fichier de rangement par défaut, mais modifiable, comme par exemple :
+		// html.outputLocation = layout.projectDirectory.dir('reports/jacoco/test')
 	}
 }
