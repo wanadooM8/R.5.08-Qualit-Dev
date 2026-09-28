@@ -31,3 +31,16 @@ jacocoTestReport {
 		// html.outputLocation = layout.projectDirectory.dir('reports/jacoco/test')
 	}
 }
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.90 // couverture minimale exigée : 90 %, sinon le build échoue
+			}
+		}
+	}
+}
+
+// "gradlew check" (et donc "gradlew build") lance aussi la vérification de couverture
+check.dependsOn jacocoTestCoverageVerification
